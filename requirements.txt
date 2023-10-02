@@ -1,0 +1,11 @@
+asgiref
+Django
+djangorestframework
+djangorestframework-simplejwt
+mysqlclient
+Pillow
+psycopg2-binary
+PyJWT
+python-dotenv
+pytz
+sqlparse

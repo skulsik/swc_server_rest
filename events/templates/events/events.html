@@ -1,0 +1,82 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+            <section class="about section-padding">
+                <table class="table">
+                    <tr>
+                        <td class="col-4">
+                            <h3>Все события</h3>
+                            <ul>
+                                {% for event in events %}
+                                <li><a href="{% url 'events:events' event.id %}">{{ event.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% if user.is_authenticated %}
+                            <h3>Мои события</h3>
+                            <ul>
+                                {% for user_event in user_events %}
+                                <li><a href="{% url 'events:events' user_event.id %}">{{ user_event.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </td>
+                        <td class="col-8">
+                            <h3>{{ event.title }}</h3>
+                            Описание: {{ event.content }}<br>
+                            <small class="text-info">Дата создания {{ event.date_of_creation }}</small><br><br>
+                            <h3>Участники</h3>
+                            {% for user in participants %}
+
+<div class="container">
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ user.id }}">
+    {{ user.first_name }} {{ user.last_name }}
+  </button>
+
+  <!-- The Modal -->
+  <div class="modal" id="{{ user.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{ user.first_name }} {{ user.last_name }}</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            Логин: {{ user.username }}<br>
+            Дата регистрации: {{ user.date_joined }}<br>
+            Дата рождения: {{ user.date_of_birth }}
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><br>
+
+
+                            {% endfor %}
+
+                            <br>
+                            <form action="{% url 'events:events' event.id %}" class="form-horizontal" method="get">
+                                {% if user in participants %}
+                                <button type="submit" name="participation" value="cancell" class="btn btn-success">Отказаться от участия</button>
+                                {% else %}
+                                <button type="submit" name="participation" value="add" class="btn btn-success">Принять участие</button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
+<br><br>
+<center>
+<div class="col-6">
+    <div class="card">
+        <div class="card-header">
+            <div class="about-info">
+                <br>
+                <p>Регистрация пользователя.</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" method="post">
+                Логин <input type="text" id="login" name="login" required minlength="4" maxlength="150" size="20" class="input-group">
+                Пароль <input type="password" id="password" name="password" required minlength="4" maxlength="150" size="20" class="input-group">
+                Повтор пароля <input type="password" id="password2" name="password2" required minlength="4" maxlength="150" size="20" class="input-group">
+                Имя <input type="text" id="name" name="name" required minlength="4" maxlength="150" size="20" class="input-group">
+                Фамилия <input type="text" id="last_name" name="last_name" required minlength="4" maxlength="150" size="20" class="input-group">
+                День рождения <input type="date" id="birth" name="birth" minlength="4" maxlength="150" size="20" class="input-group">
+                <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+            </form>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+</div>
+</center>
+
+{% endblock %}
